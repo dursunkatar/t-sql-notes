@@ -1,4 +1,4 @@
-/* **** DÖNGÜLER***** */
+/* **** DÃ–NGÃœLER***** */
 declare @sayac int = 0
 
 while @sayac <= 10
@@ -11,7 +11,7 @@ begin
 end
 
 EXIT_LOOP:
-print 'Çýktým'
+print 'Ã‡iktim'
 --------------------------------
 while @sayac <= 10
 begin
@@ -47,7 +47,7 @@ while @sayac <=10
 /* ********************** */
 
 
-/* **** BELÝRTÝLEN COLUMN'UN TEKRARLANANLARINI SÝLER ***** */
+/* **** BELIRTILEN COLUMN'UN TEKRARLANANLARINI SILER ***** */
 DELETE DUP
 FROM
 (
@@ -58,41 +58,41 @@ WHERE DUP.Val > 1
 /* ********************** */
 
 /* **** CURSOR KULLANIMI ***** */
--- MyTablo tablosu için bir cursor oluþturuldu
+-- MyTablo tablosu iÃ§in bir cursor oluÅŸturuldu
 declare t_cursor cursor for select Id from MyTablo;
 
--- tablo üzerinde dolaþabilmek için cursor açýldý
+-- tablo Ã¼zerinde dolaÅŸabilmek iÃ§in cursor aÃ§ildi
 open t_cursor;
 
--- üzerinde dolaþýlan tablodan dönen veriyi karþýlamak için deðiþken oluþturuldu
+-- Ã¼zerinde dolaÅŸilan tablodan dÃ¶nen veriyi karÅŸilamak iÃ§in deÄŸiÅŸken oluÅŸturuldu
 declare @personelId int;
 
--- fetch komutu ile tablo üzerinde ilk satýra gelindi
+-- fetch komutu ile tablo Ã¼zerinde ilk satira gelindi
 fetch next from t_cursor into @personelId;
 
--- dönen deðer ekrana yazdýrýldý
+-- dÃ¶nen deÄŸer ekrana yazdirildi
 print  cast(@personelId as int)
 
--- tabloda dolaþýlacak baþka deðer varmý bilgisini verir, eðer "0" ise deðer var eðer "-1" ise okunacak deðer yok demektir
+-- tabloda dolaÅŸilacak baÅŸka deÄŸer varmi bilgisini verir, eÄŸer "0" ise deÄŸer var eÄŸer "-1" ise okunacak deÄŸer yok demektir
 print @@fetch_status
 
-close t_cursor			-- Cursoru kapatýr
-deallocate t_cursor	-- Cursoru hafýzadan tamamen siler
+close t_cursor			-- Cursoru kapatir
+deallocate t_cursor	-- Cursoru hafizadan tamamen siler
 /* ********************** */
 
 /* **** CASE KULLANIMI ***** */
 SELECT *,Aktifmi= case 
 when Aktif=1 then 'Evet' 
-when Aktif=0 then 'Hayýr'
+when Aktif=0 then 'Hayir'
 end 
 FROM MyTablo
 /* ********************** */
 
 /* **** IIF KULLANIMI ***** */
-SELECT *,Aktifmi= IIF(Aktif=1,'Evet','Hayýr') FROM MyTablo
+SELECT *,Aktifmi= IIF(Aktif=1,'Evet','Hayir') FROM MyTablo
 /* ********************** */
 
-/* **** ÝKÝ TABLOYU BÝRBÝRÝNE BAÐLAYIP GÜNCELLEME ***** */
+/* **** IKI TABLOYU BIRBIRINE BAÄžLAYIP GÃœNCELLEME ***** */
 update  t1 
 set t1.Column_Name='new value' 
 from Tablo_1 t1,Tablo_2 t2 
@@ -101,14 +101,14 @@ t2.KayitID = t1.KayitID and t1.Id=134
 /* ********************** */
 
 /* **** SAYFALAMA ***** */
-/*Kayýtlarý belirli bir sayýdan belirli adeti listeler 
-  Örneðin tablodaki ilk 5 kayýttan sonraki 5 kayýt gelsin gibi
-  SKÝP/TAKE
+/*Kayitlari belirli bir sayidan belirli adeti listeler 
+  Ã–rneÄŸin tablodaki ilk 5 kayittan sonraki 5 kayit gelsin gibi
+  SKIP/TAKE
   */
 select * from MyTablo order by ID asc offset 5 rows fetch next 5 rows only
 /* ********************** */
 
-/* **** FUNCTÝON ***** */
+/* **** FUNCTION ***** */
 create function Durum(@a int,@b int)
 returns nvarchar(10)
 as
@@ -123,7 +123,7 @@ declare  @sonuc int = @a + @b
 end
 /* ********************** */
 
-/* **** GERÝYE TABLO DÖNDÜRE FUNCTÝON ***** */
+/* **** GERIYE TABLO DÃ–NDÃœRE FUNCTION ***** */
 create function Func(@param int)
 RETURNS  @resultTable TABLE 
 (
@@ -138,6 +138,6 @@ BEGIN
 END
 /* ********************** */
 
-/* ****DÝÐER TABLODA OLMAYAN KAYITLARI LÝSTELEME  ***** */
+/* ****DIÄžER TABLODA OLMAYAN KAYITLARI LISTELEME  ***** */
 select * from Tablo where Id not in(select Id from DigerTablo)
 /* ********************** */
