@@ -123,7 +123,7 @@ declare  @sonuc int = @a + @b
 end
 /* ********************** */
 
-/* **** GERIYE TABLO DÖNDÜRE FUNCTION ***** */
+/* **** GERIYE TABLO DÖNDÜREN FUNCTION ***** */
 create function Func(@param int)
 RETURNS  @resultTable TABLE 
 (
