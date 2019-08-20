@@ -141,3 +141,8 @@ END
 /* ****DIĞER TABLODA OLMAYAN KAYITLARI LISTELEME  ***** */
 select * from Tablo where Id not in(select Id from DigerTablo)
 /* ********************** */
+
+/* **** TARİHE GÜN VE AY EKLEME ***** */
+select dateadd(DAY,1,getdate())
+select dateadd(MONTH,1,getdate())
+/* ********************** */
