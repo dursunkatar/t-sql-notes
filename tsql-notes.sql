@@ -146,3 +146,28 @@ select * from Tablo where Id not in(select Id from DigerTablo)
 select dateadd(DAY,1,getdate())
 select dateadd(MONTH,1,getdate())
 /* ********************** */
+
+/* **** TRANSACTİON VE ERROR HANDLİNG ÖRNEĞİ ***** */
+declare @ErrNum as tinyint
+
+BEGIN TRANSACTION 
+
+	insert into Kisiler (Name,Age) values ('asd','dd')
+	insert into Dosyalar (KisiId,Dosya) values (20,'dosya b')
+
+	If @@ERROR <> 0 begin
+	set @ErrNum =1
+	goto ErrProc
+	end
+
+
+	ErrProc:
+	if @ErrNum=1 begin
+	print 'hata var işlemler geri alınıyor'
+	ROLLBACK TRANSACTION 
+	end
+	else begin
+	print 'hata yok işlemler kaydediliyor'
+	COMMIT TRANSACTION
+end
+/* ********************** */
