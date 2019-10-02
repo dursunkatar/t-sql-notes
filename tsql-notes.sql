@@ -171,3 +171,7 @@ BEGIN TRANSACTION
 	COMMIT TRANSACTION
 end
 /* ********************** */
+
+/* **** Hernagi bir kolona UNIQUE(tekillik) özelliği verme***** */
+ALTER TABLE MyTable ADD UNIQUE (MyColumn);
+/* ********************** */
