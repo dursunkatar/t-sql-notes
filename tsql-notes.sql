@@ -78,6 +78,27 @@ print @@fetch_status
 
 close t_cursor			-- Cursoru kapatir
 deallocate t_cursor	-- Cursoru hafizadan tamamen siler
+
+--DÖNGÜ İLE CURSOR KULLANIMI
+DECLARE @ambarID INT
+DECLARE @ambarIsmi nvarchar(15)
+DECLARE cur CURSOR
+FOR
+
+SELECT top 3 AmbarID,AmbarIsmi FROM Ambarlar order by AmbarID desc
+
+OPEN cur
+FETCH NEXT FROM cur INTO @ambarID,@ambarIsmi
+
+WHILE @@FETCH_STATUS = 0
+BEGIN
+	SELECT @ambarID,@ambarIsmi
+
+	FETCH NEXT FROM cur INTO @ambarID,@ambarIsmi
+END
+
+CLOSE cur
+DEALLOCATE cur
 /* ********************** */
 
 /* **** CASE KULLANIMI ***** */
